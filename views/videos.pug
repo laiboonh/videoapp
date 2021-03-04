@@ -1,0 +1,48 @@
+extends layout
+
+block content
+
+
+  h1= title
+  p Welcome to #{title}
+  p
+    ul
+      each video_file in video_files
+        li
+          a(href="/videos?video_file=" + video_file)
+            =video_file
+
+  video(id="my-video" class="video-js" controls preload="auto" width="640" height="360" data-setup="{}")
+    source(id="my-video-src" src="" type="video/mp4")/
+
+    p(class="vjs-no-js").
+      To view this video please enable JavaScript, and consider upgrading to a
+      web browser that <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+
+  p TimeStamp:
+    span(id="demo")
+
+  script(src="https://vjs.zencdn.net/7.10.2/video.min.js").
+
+  script.
+    function getParameterByName(name, url = window.location.href) {
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+    function myFunction() {
+      // Display the current position of the audio in a p element with id="demo"
+      document.getElementById("demo").innerHTML = aud.currentTime;
+    }
+    let video_src = getParameterByName("video_file");
+
+    document.getElementById("my-video-src").setAttribute("src",`/videos/${video_src}`);
+
+    // Get the audio element with id="my-video"
+    var aud = document.getElementById("my-video");
+
+    // Assign an ontimeupdate event to the audio element, and execute a function if the current playback position has changed
+    aud.ontimeupdate = function() {myFunction()};
