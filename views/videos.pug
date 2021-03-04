@@ -23,6 +23,7 @@ block content
     span(id="demo")
 
   script(src="https://vjs.zencdn.net/7.10.2/video.min.js").
+  script(src="//cdn.sc.gl/videojs-hotkeys/0.2/videojs.hotkeys.min.js").
 
   script.
     function getParameterByName(name, url = window.location.href) {
@@ -40,6 +41,14 @@ block content
     let video_src = getParameterByName("video_file");
 
     document.getElementById("my-video-src").setAttribute("src",`/videos/${video_src}`);
+
+    videojs('my-video').ready(function() {
+      this.hotkeys({
+        volumeStep: 0.1,
+        seekStep: 5,
+        enableModifiersForNumbers: false
+      });
+    });
 
     // Get the audio element with id="my-video"
     var aud = document.getElementById("my-video");
