@@ -6,21 +6,25 @@ block content
   h1= title
   p Welcome to #{title}
   p
-    ul
-      each video_file in video_files
-        li
-          a(href="/videos?video_file=" + video_file.name)
-            =video_file.name + " " + video_file.time
-
-  video(id="my-video" class="video-js" controls preload="auto" width="640" height="360" data-setup="{}")
-    source(id="my-video-src" src="" type="video/mp4")/
-
-    p(class="vjs-no-js").
-      To view this video please enable JavaScript, and consider upgrading to a
-      web browser that <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-
-  p TimeStamp:
-    span(id="demo")
+    table
+      tr
+        td(style={'vertical-align': 'top'})
+          table
+            each video_file in video_files
+              tr
+                td
+                  =video_file.time
+                td
+                  a(href="/videos?video_file=" + video_file.name)
+                    =video_file.name
+        td
+          video(id="my-video" class="video-js" controls preload="auto" width="640" height="360" data-setup="{}")
+              source(id="my-video-src" src="" type="video/mp4")/
+              p(class="vjs-no-js").
+                To view this video please enable JavaScript, and consider upgrading to a
+                web browser that <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+          p TimeStamp:
+            span(id="demo")
 
   script(src="https://vjs.zencdn.net/7.10.2/video.min.js").
   script(src="//cdn.sc.gl/videojs-hotkeys/0.2/videojs.hotkeys.min.js").
