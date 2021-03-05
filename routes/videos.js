@@ -19,6 +19,7 @@ var walk = function(dir) {
             results.push({name: file.slice(videos_folder.length), time: mtime});
         }
     });
+    results.sort((a,b) => b.time - a.time);
     return results;
 }
 
