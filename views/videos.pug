@@ -79,7 +79,7 @@ block content
       });
       this.on('timeupdate', function () {
         document.getElementById("demo").innerHTML = this.currentTime();
-        setCookie(video_src, this.currentTime());
+        setCookie(video_src, this.currentTime(), 365);
       })
     });
 
