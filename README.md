@@ -2,10 +2,11 @@
 
 A video streaming app that will have the ability to remember where you last left off and continue from there
 
-## start app
+## Start app
+Put video files in `public/videos`
 
+Install dependencies and run server
 ```
-cd videoapp
 npm install
 DEBUG=videoapp:* npm start
 ```
