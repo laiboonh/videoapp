@@ -13,10 +13,12 @@ block content
             each video_file in video_files
               tr
                 td
-                  =video_file.time
+                  button(onclick=`confirmDelete("${video_file.name}")`) X
                 td
                   a(href="/videos?video_file=" + video_file.name)
                     =video_file.name
+                td
+                  =video_file.time
         td
           video(id="my-video" class="video-js" controls preload="auto" width="640" height="360" data-setup="{}")
               source(id="my-video-src" src="" type="video/mp4")/
@@ -28,8 +30,24 @@ block content
 
   script(src="https://vjs.zencdn.net/7.10.2/video.min.js").
   script(src="//cdn.sc.gl/videojs-hotkeys/0.2/videojs.hotkeys.min.js").
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js").
 
   script.
+    function confirmDelete(fileName) {
+      if (confirm(`Are you sure you want to delete ${fileName}!`)) {
+        axios.get(`/videos/delete?video_file=${fileName}`)
+          .then(response => {
+            alert("Delete Successful");
+            location.reload();
+          })
+          .catch(error => {
+            alert("Delete Fail");
+          })
+      } else {
+        alert("You pressed Cancel!");
+      }
+    }
+
     function getParameterByName(name, url = window.location.href) {
         name = name.replace(/[\[\]]/g, '\\$&');
         var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),

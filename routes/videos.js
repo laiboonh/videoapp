@@ -27,5 +27,12 @@ var walk = function(dir) {
 router.get('/', function(req, res, next) {
   res.render('videos', { title: 'Video App', video_files: walk(videos_folder) });
 });
+router.get("/delete", function(req, res, next) {
+  fs.unlink(`./public/videos/${req.query.video_file}`, function (err) {
+    if (err) res.status(500).json({err: err})
+    else res.status(200).json({video_file: req.query.video_file})
+  })
+
+})
 
 module.exports = router;
