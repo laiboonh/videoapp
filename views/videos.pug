@@ -19,7 +19,7 @@ block content
                     =video_file.name
                 td
                   =video_file.time
-        td
+        td(style={'vertical-align': 'top'})
           video(id="my-video" class="video-js" controls preload="auto" width="640" height="360" data-setup="{}")
               source(id="my-video-src" src="" type="video/mp4")/
               p(class="vjs-no-js").
